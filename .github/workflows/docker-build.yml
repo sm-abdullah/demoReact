@@ -30,6 +30,9 @@ jobs:
       run: "echo version is ${{ env.VERSION }}"
 
     - name: Replace image version in deployment.yaml
+      run: sed -i "s|\${VERSION}|${{ env.VERSION }}|" ./demo-react/k8s/deployment.yaml
+
+    - name: Replace image version in deployment.yaml
       run: sed -i "s|smabdullah/demo-react:latest|smabdullah/demo-react:${{ env.VERSION }}|" ./demo-react/k8s/deployment.yaml
     - name: Set up Docker
       uses: docker/setup-buildx-action@v2
