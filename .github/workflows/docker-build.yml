@@ -17,9 +17,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Generate version number
-      id: version
+    - name: Set VERSION environment variable
       run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+   
     - name: Display version 
       run: echo "verions is ${{ env.VERSION }}"
 
