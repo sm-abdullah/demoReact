@@ -37,6 +37,7 @@ jobs:
         context: ./demo-react
         file: ./demo-react/Dockerfile
         push: true
+        platforms: linux/amd64,linux/arm64
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/demo-react:latest
           ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ github.sha }}
