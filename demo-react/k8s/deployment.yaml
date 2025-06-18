@@ -13,12 +13,10 @@ spec:
     metadata:
       labels:
         app: demo-react
-      annotations:
-        kubernetes.io/restartedAt: "{{now | date('2006-01-02T15:04:05Z07:00')}}"
     spec:
       containers:
       - name: demo-react
-        image: smabdullah/demo-react:latest
+        image: smabdullah/demo-react:${VERSION}
         ports:
         - containerPort: 80
         readinessProbe:
