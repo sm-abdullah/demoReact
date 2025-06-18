@@ -19,7 +19,9 @@ jobs:
     
     - name: Generate version number
       id: version
-      run: echo "VERSION=$(git describe --tags --always --dirty)" >> $GITHUB_ENV
+      run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+    - name: Display version 
+      run: echo "verions is {{ env.VERSION }}"
 
     - name: Debug Secrets
       run: echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}"
@@ -35,8 +37,7 @@ jobs:
 
     - name: List files in the repository
       run: ls -al
-    - name: Replace version in deployment.yaml
-      run: sed -i "s/\${{ env.VERSION }}/v1.0.0/" deployment.yaml
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
