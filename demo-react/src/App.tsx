@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const appVersion = process.env.REACT_APP_VERSION || "unknown";
+  const appVersion = process.env.APP_VERSION || "unknown";
+  const buildDate = process.env.APP_BUILD_TIME || "unknown";
 
   return (
     <div className="App">
@@ -18,7 +19,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          after version it looks greate {appVersion}
+          after version it looks greate {appVersion} and build date {buildDate}
         </a>
       </header>
     </div>

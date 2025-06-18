@@ -12,6 +12,11 @@ RUN npm install
 ARG VERSION
 ENV APP_VERSION=$VERSION
 
+# Generate current time and set it as an environment variable
+RUN export BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ") && echo "BUILD_TIME=$BUILD_TIME" > /app/build_time.env
+ARG BUILD_TIME
+ENV APP_BUILD_TIME=$BUILD_TIME
+
 # Copy the rest of the application files
 COPY . .
 
