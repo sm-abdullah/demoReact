@@ -38,5 +38,5 @@ jobs:
         file: ./demo-react/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-          ${{ secrets.DOCKER_USERNAME }}/my-app:${{ github.sha }}
+          ${{ secrets.DOCKER_USERNAME }}/demo-react:latest
+          ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ github.sha }}
