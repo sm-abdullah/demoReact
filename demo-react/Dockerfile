@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependency installation
+# Copy only package.json and package-lock.json first to leverage Docker caching
 COPY package.json package-lock.json ./
 
 # Install dependencies
@@ -14,11 +14,14 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Install serve globally
-RUN npm install -g serve
+# Use a lightweight web server for serving the built files
+FROM nginx:alpine
+
+# Copy the build output to the Nginx web server directory
+COPY --from=0 /app/build /usr/share/nginx/html
 
 # Expose the port
-EXPOSE 3000
+EXPOSE 80
 
-# Start the application using serve
-CMD ["serve", "-s", "build"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
