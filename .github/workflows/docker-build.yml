@@ -19,7 +19,7 @@ jobs:
     
     - name: Generate version number
       id: version
-      run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
     - name: Display version 
       run: echo "verions is ${{ env.VERSION }}"
 
