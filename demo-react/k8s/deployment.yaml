@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-react
+  labels:
+    app: demo-react
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-react
+  template:
+    metadata:
+      labels:
+        app: demo-react
+    spec:
+      containers:
+      - name: demo-react
+        image: smabdullah/demo-react:latest
+        ports:
+        - containerPort: 3000
