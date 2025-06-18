@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React + demo react + docker
+          Learn React + demo react + docker + commit form app
         </a>
       </header>
     </div>
