@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: demo-react
-        image: smabdullah/demo-react:latest
+        image: smabdullah/demo-react:${{ env.VERSION }}
         ports:
         - containerPort: 80
         readinessProbe:

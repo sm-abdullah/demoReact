@@ -24,7 +24,7 @@ jobs:
         if [ "${{ github.event.release.tag_name }}" != "" ]; then
           echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
         else
-          echo "VERSION=$(date -u +"%Y%m%d%H%M%S")-${{ github.sha }}" >> $GITHUB_ENV
+          echo "VERSION=$(date -u +"%Y%m%d%H%M%S")" >> $GITHUB_ENV
         fi
     - name: Set up Node.js
       run: "echo version is ${{ env.VERSION }}"
@@ -48,4 +48,4 @@ jobs:
         build-args: |
           VERSION=${{ env.VERSION }}
         tags: |
-          ${{ secrets.DOCKER_USERNAME }}/demo-react:latest
+          ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ env.VERSION }}
