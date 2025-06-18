@@ -3,6 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  const appVersion = process.env.REACT_APP_VERSION || "unknown";
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,8 +18,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React + demo react + docker + commit form app + 222+ 333 +
-          before kita
+          after version it looks greate {appVersion}
         </a>
       </header>
     </div>
