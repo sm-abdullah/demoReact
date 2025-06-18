@@ -17,6 +17,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
+    - name: Generate version number
+      id: version
+      run: echo "VERSION=$(git describe --tags --always --dirty)" >> $GITHUB_ENV
+
     - name: Debug Secrets
       run: echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}"
 
@@ -40,4 +44,4 @@ jobs:
         platforms: linux/amd64,linux/arm64
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/demo-react:latest
-          ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ github.sha }}
+          ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ env.VERSION }}
