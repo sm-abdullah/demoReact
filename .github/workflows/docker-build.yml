@@ -35,6 +35,8 @@ jobs:
 
     - name: List files in the repository
       run: ls -al
+    - name: Replace version in deployment.yaml
+      run: sed -i "s/\${{ env.VERSION }}/v1.0.0/" deployment.yaml
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
