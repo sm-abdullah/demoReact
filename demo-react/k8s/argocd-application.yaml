@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/sm-abdullah/demoReact.git
     targetRevision: HEAD
-    path: k8s
+    path: demo-react/k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: default

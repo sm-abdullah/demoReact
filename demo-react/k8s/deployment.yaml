@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
       - name: demo-react
-        image: smabdullah/demo-react:${VERSION}
+        image: smabdullah/demo-react:latest
+        env:
+        - name: VERSION
+          value: "1.00.00" # Replace with your actual API URL
         ports:
         - containerPort: 80
         readinessProbe:

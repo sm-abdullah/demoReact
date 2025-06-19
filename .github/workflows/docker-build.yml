@@ -54,3 +54,4 @@ jobs:
           VERSION=${{ env.VERSION }}
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/demo-react:${{ env.VERSION }}
+          ${{ secrets.DOCKER_USERNAME }}/demo-react:latest
