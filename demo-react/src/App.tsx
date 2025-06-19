@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const appVersion = process.env.APP_VERSION || "unknown";
+  const appVersion = process.env.VERSION || "unknown";
   const buildDate = process.env.APP_BUILD_TIME || "unknown";
 
   return (
