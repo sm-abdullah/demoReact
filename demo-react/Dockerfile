@@ -1,20 +1,29 @@
-# Use Node.js base image
 FROM node:20-alpine
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json for dependency installation
+# Copy only package.json and package-lock.json first to leverage Docker caching
 COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application files
-COPY . ./
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Use a lightweight web server for serving the built files
+FROM nginx:alpine
+
+# Copy the build output to the Nginx web server directory
+COPY --from=0 /app/build /usr/share/nginx/html
+
+
 
 # Expose the port
-EXPOSE 3000
+EXPOSE 80
 
-# Start the Node.js application
-CMD ["npm", "start"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

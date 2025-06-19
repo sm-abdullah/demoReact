@@ -21,18 +21,18 @@ spec:
         - name: VERSION
           value: "1.00.00" # Replace with your actual API URL
         - name: REACT_APP_APP_VERSION
-          value: "V1.22223" # Replace with your actual API URL
+          value: "V1.44" # Replace with your actual API URL
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /
-            port: 3000
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /
-            port: 3000
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 15
