@@ -20,8 +20,12 @@ spec:
         env:
         - name: VERSION
           value: "1.00.00" # Replace with your actual API URL
+        - name: REACT_APP_PORT
+          value: 80
+        - name: PORT
+          value: 80
         - name: REACT_APP_APP_VERSION
-          value: "V1.44" # Replace with your actual API URL
+          value: "V1.444" # Replace with your actual API URL
         ports:
         - containerPort: 80
         readinessProbe:
