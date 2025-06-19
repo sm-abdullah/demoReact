@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "./logo.svg";
+import env from "react-dotenv";
 import "./App.css";
 
 function App() {
-  const appVersion = process.env.VERSION || "unknown";
+  const appVersion = env.REACT_APP_API_URL || "unknown3";
   const buildDate = process.env.APP_BUILD_TIME || "unknown";
 
   return (
