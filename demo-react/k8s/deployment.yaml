@@ -19,7 +19,7 @@ spec:
         image: smabdullah/demo-react:latest
         env:
         - name: REACT_APP_APP_VERSION
-          value: "V1.444" # Replace with your actual API URL
+          value: "V1.44e4" # Replace with your actual API URL
         ports:
         - containerPort: 3000
         readinessProbe:
