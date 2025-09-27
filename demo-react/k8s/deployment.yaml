@@ -17,9 +17,10 @@ spec:
       containers:
       - name: demo-react
         image: smabdullah/demo-react:latest
+        imagePullPolicy: Always
         env:
         - name: REACT_APP_APP_VERSION
-          value: "V1.45e5" # Updated version for testing
+          value: "V1.46" # Updated version for ArgoCD sync test
         ports:
         - containerPort: 3000
         readinessProbe:
