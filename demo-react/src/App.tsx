@@ -19,7 +19,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          after version it looks greate {appVersion} and build date {buildDate}
+          hellow world post sync hook after version it looks greate {appVersion}{" "}
+          and build date {buildDate}
         </a>
       </header>
     </div>
