@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deployment-success-hook
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: github-workflow-trigger
+        image: curlimages/curl:latest
+        env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: token
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - |
+          echo "🎉 ArgoCD PostSync Hook: Deployment Successful!"
+          echo "=================================="
+          echo "📋 Deployment Information:"
+          echo "   App Name: demo-react"
+          echo "   Namespace: default"
+          echo "   Revision: latest"
+          echo "   Health: Healthy"
+          echo "   Sync Status: Synced"
+          echo "   Timestamp: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo ""
+          echo "🚀 Triggering GitHub Actions workflow..."
+          
+          curl -s -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/sm-abdullah/demoReact/dispatches \
+            -d '{
+              "event_type": "deployment-success",
+              "client_payload": {
+                "app_name": "demo-react",
+                "version": "latest",
+                "namespace": "default",
+                "health": "Healthy",
+                "sync_status": "Synced",
+                "timestamp": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'"
+              }
+            }' && echo "✅ GitHub workflow triggered successfully!" || echo "❌ Failed to trigger GitHub workflow"
+      restartPolicy: Never
+  backoffLimit: 1

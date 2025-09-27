@@ -16,10 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-    hooks:
-      postSync:
-        exec:
-          command: ["/bin/bash"]
-          args: ["-c", "curl -s -X POST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token YOUR_GITHUB_TOKEN_HERE' -H 'Content-Type: application/json' https://api.github.com/repos/sm-abdullah/demoReact/dispatches -d '{\"event_type\": \"deployment-success\", \"client_payload\": {\"app_name\": \"$ARGOCD_APP_NAME\", \"version\": \"$ARGOCD_APP_REVISION\", \"namespace\": \"$ARGOCD_APP_NAMESPACE\", \"health\": \"$ARGOCD_APP_HEALTH_STATUS\", \"sync_status\": \"$ARGOCD_APP_SYNC_STATUS\", \"timestamp\": \"'$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\"'}}' && echo '✅ GitHub workflow triggered successfully!' || echo '❌ Failed to trigger GitHub workflow'"]
