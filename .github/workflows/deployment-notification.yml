@@ -1,0 +1,41 @@
+name: Deployment Success Notification
+
+# This workflow will be triggered by ArgoCD webhook
+on:
+    repository_dispatch:
+        types: [deployment-success]
+
+jobs:
+    notify-deployment:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Display deployment info
+              run: |
+                  echo "🎉 DEPLOYMENT SUCCESSFUL! 🎉"
+                  echo "=================================="
+                  echo "App Name: ${{ github.event.client_payload.app_name || 'demo-react' }}"
+                  echo "Version: ${{ github.event.client_payload.version || 'latest' }}"
+                  echo "Namespace: ${{ github.event.client_payload.namespace || 'default' }}"
+                  echo "Health Status: ${{ github.event.client_payload.health || 'Healthy' }}"
+                  echo "Sync Status: ${{ github.event.client_payload.sync_status || 'Synced' }}"
+                  echo "Timestamp: $(date)"
+                  echo "=================================="
+
+            - name: Send notification (example)
+              run: |
+                  echo "📱 Sending notification..."
+                  echo "✅ React app deployed successfully!"
+                  echo "🔗 App URL: http://your-app-url.com"
+                  echo "📊 Deployment completed at: $(date)"
+
+            - name: Create deployment summary
+              run: |
+                  echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+                  echo "- **App**: ${{ github.event.client_payload.app_name || 'demo-react' }}" >> $GITHUB_STEP_SUMMARY
+                  echo "- **Version**: ${{ github.event.client_payload.version || 'latest' }}" >> $GITHUB_STEP_SUMMARY
+                  echo "- **Status**: ✅ Successfully Deployed" >> $GITHUB_STEP_SUMMARY
+                  echo "- **Time**: $(date)" >> $GITHUB_STEP_SUMMARY
